@@ -51,3 +51,12 @@ jobs:
 
     - name: Run tests
       run: bundle exec rspec
+
+          # 以下を追加
+    - name: Upload
+      uses: actions/upload-artifact@v2 # 利用するアクションを指定
+      if: failure() # 失敗したときだけ実行
+      with:
+        name: my-uploads
+        path: tmp/screenshots/ # uploadするパス（Rails rootからの相対パス）
+
